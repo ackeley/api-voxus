@@ -1,0 +1,153 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Voxus",
+        "version": "0.1"
+    },
+    "components":{
+        "securitySchemes":{
+            "bearerAuth": {
+                "type": "http",
+                "scheme":"bearer"
+            }
+        }
+    },
+
+    "paths": {
+        "/api/register": {
+            "post": {
+                "summary": "Cria um novo usuário",
+                "tags": ["Registrar"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type" : "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "string": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name"  : "name",
+                                    "email" : "example@email.com.br",
+                                    "password" : "xxxxxx"
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "responses": {
+                    "200": {
+                        "description": "Request  success!"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "summary": "Retorna o id do usuário.",
+                "tags": ["Login"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "string": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "email" : "example@email.com.br",
+                                    "password" : "xxxxxx"
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "responses": {
+                    "200": {
+                        "description": "Request  success!"
+                    }
+                }
+            }
+        },
+        "/api/user/{id}": {
+            "get": {
+                "security": [
+                    {"bearerAuth": []}
+                ],
+                "summary": "Retorna todas as posições de latitude e longitude do usuário solicitado.",
+                "operationId": "id",
+                "tags": ["Usuários"],
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer",
+                        "required": true,
+                        "deion": "Numeric ID of the user to get"
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "description": "Request  success!"
+                    }
+                }
+            }
+        },
+        "/api/save-location": {
+            "post": {
+                "security": [
+                    {"bearerAuth": []}
+                ],
+                "summary": "Cadastra as posições de um usuário.",
+                "tags": ["Usuários"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "number"
+                                    },
+                                    "latitude": {
+                                        "type": "number"
+                                    },
+                                    "longitude": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "user_id" : "12",
+                                    "latitude" : "-23.561297",
+                                    "longitude" : "-46.656476"
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "responses": {
+                    "200": {
+                        "description": "Request  success!"
+                    }
+                }
+            }
+        }
+    }
+}
